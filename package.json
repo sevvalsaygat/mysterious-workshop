@@ -6,8 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint .",
+    "ts:check": "next typegen && tsc --noEmit",
     "format": "prettier --write ."
+  },
+  "engines": {
+    "node": "26.x"
   },
   "dependencies": {
     "next": "16.4.6",
@@ -16,7 +20,7 @@
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "4.3.3",
-    "@types/node": "^20",
+    "@types/node": "^26.6.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

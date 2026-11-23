@@ -8,10 +8,18 @@
     "start": "next start",
     "lint": "eslint .",
     "ts:check": "next typegen && tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "engines": {
     "node": "26.x"
+  },
+  "lint-staged": {
+    "*.{js,mjs,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": "prettier --write"
   },
   "dependencies": {
     "next": "16.4.6",
@@ -19,12 +27,16 @@
     "react-dom": "19.3.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
     "@tailwindcss/turbopack": "4.3.3",
     "@types/node": "^26.6.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.2",
     "prettier": "3.10.1",
     "prettier-plugin-tailwindcss": "0.8.1",
     "tailwindcss": "4.3.3",

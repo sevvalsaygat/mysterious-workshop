@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+/* Site colours (design: "A · Toprak") */
+@theme {
+  --color-cream: #f4ede3; /* clay cream: light background */
+  --color-sand: #d9c3a5; /* sand: surfaces, product backgrounds */
+  --color-terracotta: #a9472a; /* accent; on dark only as a dot or a button with white text */
+  --color-olive: #5e6b3a; /* second accent */
+  --color-olive-text: #4b5630; /* olive for small text (contrast) */
+  --color-espresso: #2e1a12; /* dark espresso: background of the dark sections */
+  --color-earth: #33241b; /* dark earth: text on light backgrounds */
+  --color-muted: #6e5a4b; /* muted text on light background */
+  --color-muted-light: #cdbba3; /* muted text on dark background */
+}
+
+/* Fonts come from next/font as CSS variables on <html>, so they are mapped inline */
+@theme inline {
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-cream);
+    color: var(--color-earth);
+  }
+
+  ::selection {
+    background-color: var(--color-sand);
+    color: var(--color-earth);
+  }
+}

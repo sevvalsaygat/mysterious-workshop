@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { SITE } from "@app/constants";
+import { fraunces, manrope } from "@app/lib/fonts";
 
 import "./globals.css";
 
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
 
 const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => {
   return (
-    <html lang="tr" className="h-full antialiased">
+    <html
+      lang="tr"
+      className={`${fraunces.variable} ${manrope.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

@@ -1,0 +1,26 @@
+/*
+ * The vase sits between the two words of the giant logo, behind the letters.
+ * Every size is a multiple of the logo font size (--fs), so the vase scales with it.
+ * Measured on Fraunces 300: the baseline is 0.1385em above the bottom of the line box.
+ */
+.hero {
+  --fs: clamp(64px, 14vw, 210px);
+}
+
+.title {
+  font-size: var(--fs);
+}
+
+.vase {
+  position: absolute;
+  bottom: calc(0.1385 * var(--fs)); /* base of the vase on the baseline */
+  left: calc(50% - 0.6955 * var(--fs)); /* centred: half of the width */
+  width: calc(1.391 * var(--fs));
+  transform: rotate(-10deg);
+  transform-origin: 50% 100%;
+}
+
+.vaseImage {
+  /* darker, so the cream letters stay readable on it */
+  filter: brightness(0.78);
+}

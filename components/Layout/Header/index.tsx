@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import Button from "@app/components/Button";
+import MobileMenu from "@app/components/Layout/MobileMenu";
 import NavLink from "@app/components/Layout/NavLink";
 import { BOOKING_LINK, NAV_LINKS } from "@app/constants";
 
@@ -26,6 +27,8 @@ const Header: React.FC = () => {
             size="sm"
           />
         </nav>
+
+        <MobileMenu />
       </div>
     </header>
   );

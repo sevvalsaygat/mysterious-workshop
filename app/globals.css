@@ -36,6 +36,13 @@
     color: var(--color-earth);
   }
 
+  /* While the mobile menu is open, the page behind it does not scroll (below 900px) */
+  @media (width < 56.25rem) {
+    html:has(#mobile-menu:popover-open) {
+      overflow: hidden;
+    }
+  }
+
   /* Visitors who ask for less motion get no animations or transitions */
   @media (prefers-reduced-motion: reduce) {
     *,

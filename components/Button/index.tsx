@@ -10,6 +10,8 @@ type ButtonPropTypes = {
   size?: "sm" | "md";
   arrow?: boolean;
   className?: string;
+  popoverTarget?: string;
+  popoverTargetAction?: "show" | "hide" | "toggle";
 };
 
 const VARIANT_CLASSES = {
@@ -33,6 +35,8 @@ const Button: React.FC<ButtonPropTypes> = ({
   size = "md",
   arrow = true,
   className,
+  popoverTarget,
+  popoverTargetAction,
 }) => {
   const classes = cn(
     "group inline-flex items-center gap-1.5 rounded-full text-[13px] font-semibold tracking-[0.08em] uppercase transition-colors duration-250",
@@ -64,7 +68,12 @@ const Button: React.FC<ButtonPropTypes> = ({
   }
 
   return (
-    <button type={type} className={classes}>
+    <button
+      type={type}
+      className={classes}
+      popoverTarget={popoverTarget}
+      popoverTargetAction={popoverTargetAction}
+    >
       {content}
     </button>
   );

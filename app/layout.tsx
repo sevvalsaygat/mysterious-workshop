@@ -24,6 +24,7 @@ const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => {
       <body className="flex min-h-full flex-col">
         <Layout.Header />
         {children}
+        <Layout.Footer />
       </body>
     </html>
   );

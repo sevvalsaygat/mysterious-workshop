@@ -8,18 +8,35 @@
   --fs: clamp(64px, 14vw, 210px);
   --pad: clamp(20px, 3.5vw, 50px); /* same as px-gutter */
   --pw: calc(min(100vw, 1440px) - 2 * var(--pad)); /* photo width */
+  --ratio: 0.4375; /* photo height / width: 16/7 */
+  --shelf: calc(
+    0.815 * var(--ratio) * var(--pw)
+  ); /* photo top → shelf (81.5% down) */
   /* screen height the vase falls at */
   --top: clamp(200px, calc(130px + 14vw), 340px);
   --lift: 0px; /* extra drop so the whole photo is on screen when the vase lands */
-  --fall: calc(0.1385 * var(--fs) + 88px + 0.3566 * var(--pw) - var(--lift));
-  --d: calc(var(--pw) * 0.0809 - 0.1385 * var(--fs) + var(--lift));
+  --fall: calc(0.1385 * var(--fs) + 88px + var(--shelf) - var(--lift));
+  --d: calc(
+    0.185 * var(--ratio) * var(--pw) - 0.1385 * var(--fs) + var(--lift)
+  );
   /* Ease-in-out curve: translate(p) = A·p² − B·p³ (starts at rest, lands moving with the shelf) */
   --descent-a: calc(3 * var(--lift) + var(--fall));
   --descent-b: calc(var(--fall) + 2 * var(--lift));
 }
 
+/* Taller on phones (16/9): the photo is less of a strip and the vase matches its neighbours */
+@media (width < 56.25rem) {
+  .hero {
+    --ratio: 0.5625;
+  }
+}
+
 .title {
   font-size: var(--fs);
+}
+
+.photo {
+  aspect-ratio: 1 / var(--ratio);
 }
 
 .vase {
@@ -58,7 +75,7 @@
     .hero {
       --lift: max(
         0px,
-        calc(0.3566 * var(--pw) + 24px - var(--top) + 0.1385 * var(--fs))
+        calc(var(--shelf) + 24px - var(--top) + 0.1385 * var(--fs))
       );
     }
 

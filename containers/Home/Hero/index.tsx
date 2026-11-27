@@ -65,20 +65,23 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="relative mx-auto flow-root max-w-page px-gutter">
+          {/* On phones the texts start 12px lower, clear of the "y" in the logo; the 88px line keeps the row height */}
           <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-6 text-[clamp(15px,1.5vw,22px)]">
-            <span className="animate-rise-2">Seramik atölyesi</span>
+            <span className="animate-rise-2 max-desktop:pt-3">
+              Seramik atölyesi
+            </span>
             <span
               aria-hidden="true"
               className="h-22 w-px origin-top animate-draw bg-cream/35"
             />
-            <span className="animate-rise-2 text-right">
+            <span className="animate-rise-2 text-right max-desktop:pt-3">
               Kurslar · El yapımı ürünler
             </span>
           </div>
 
           <div
             className={cn(
-              "relative aspect-16/7 animate-settle overflow-hidden rounded-2xl",
+              "relative animate-settle overflow-hidden rounded-2xl",
               styles.photo,
             )}
           >

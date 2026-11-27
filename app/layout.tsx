@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Layout } from "@app/components";
 import { SITE } from "@app/constants";
 import { fraunces, manrope } from "@app/lib/fonts";
 
@@ -20,7 +21,14 @@ const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => {
       lang="tr"
       className={`${fraunces.variable} ${manrope.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <Layout.SkipLink />
+        <Layout.Header />
+        <main id="main" className="flex flex-1 flex-col">
+          {children}
+        </main>
+        <Layout.Footer />
+      </body>
     </html>
   );
 };

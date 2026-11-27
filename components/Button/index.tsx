@@ -7,7 +7,7 @@ type ButtonPropTypes = {
   href?: string;
   type?: "button" | "submit";
   variant?: "outline-light" | "outline-dark" | "terracotta";
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
   arrow?: boolean;
   className?: string;
   popoverTarget?: string;
@@ -19,12 +19,15 @@ const VARIANT_CLASSES = {
     "border border-cream/60 text-cream hover:bg-cream hover:text-earth",
   "outline-dark":
     "border border-earth text-earth hover:bg-espresso hover:text-cream",
-  terracotta: "bg-terracotta text-white hover:bg-terracotta-dark",
+  // Transparent border: same height as the outlined buttons when side by side
+  terracotta:
+    "border border-transparent bg-terracotta text-white hover:bg-terracotta-dark",
 };
 
 const SIZE_CLASSES = {
   sm: "px-4.5 py-2.5",
   md: "px-5 py-3",
+  lg: "px-6 py-3.5",
 };
 
 const Button: React.FC<ButtonPropTypes> = ({

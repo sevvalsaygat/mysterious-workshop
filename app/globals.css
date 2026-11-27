@@ -12,6 +12,11 @@
   --color-earth: #33241b; /* dark earth: text on light backgrounds */
   --color-muted: #6e5a4b; /* muted text on light background */
   --color-muted-light: #cdbba3; /* muted text on dark background */
+
+  /* Layout: page width, side gutter and the main breakpoint of the design */
+  --container-page: 90rem; /* 1440px → max-w-page */
+  --spacing-gutter: clamp(20px, 3.5vw, 50px); /* → px-gutter */
+  --breakpoint-desktop: 56.25rem; /* 900px → desktop: */
 }
 
 /* Fonts come from next/font as CSS variables on <html>, so they are mapped inline */

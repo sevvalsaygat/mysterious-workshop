@@ -12,6 +12,7 @@
   --color-earth: #33241b; /* dark earth: text on light backgrounds */
   --color-muted: #6e5a4b; /* muted text on light background */
   --color-muted-light: #cdbba3; /* muted text on dark background */
+  --color-cream-dim: #e9ded0; /* long text on dark background */
 
   /* Layout: page width, side gutter and the main breakpoint of the design */
   --container-page: 90rem; /* 1440px → max-w-page */

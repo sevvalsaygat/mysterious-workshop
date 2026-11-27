@@ -22,8 +22,11 @@ const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => {
       className={`${fraunces.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <Layout.SkipLink />
         <Layout.Header />
-        {children}
+        <main id="main" className="flex flex-1 flex-col">
+          {children}
+        </main>
         <Layout.Footer />
       </body>
     </html>

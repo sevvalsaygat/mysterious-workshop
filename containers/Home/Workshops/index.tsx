@@ -11,7 +11,7 @@ const Workshops: React.FC = () => {
   return (
     <section className="bg-cream text-earth">
       <div className="mx-auto flex max-w-page flex-col gap-[clamp(40px,5vw,64px)] px-gutter py-[clamp(72px,9vw,128px)]">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+        <div className="flex reveal flex-wrap items-end justify-between gap-6">
           <div className="flex flex-col gap-3.5">
             <span className="text-[13px] tracking-widest text-muted uppercase">
               (Atölyeler)

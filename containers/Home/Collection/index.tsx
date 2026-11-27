@@ -8,7 +8,7 @@ const Collection: React.FC = () => {
   return (
     <section className="bg-espresso text-cream">
       <div className="mx-auto flex max-w-page flex-col gap-[clamp(40px,5vw,72px)] px-gutter py-[clamp(72px,9vw,128px)]">
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-end gap-x-16 gap-y-6">
+        <div className="grid reveal grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-end gap-x-16 gap-y-6">
           <div className="flex flex-col gap-3.5">
             <span className="text-[13px] tracking-[0.08em] text-muted-light uppercase">
               (Koleksiyon)

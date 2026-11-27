@@ -10,7 +10,7 @@ const Closing: React.FC = () => {
           <span>Küçük gruplar · {SITE.address.district}</span>
         </div>
 
-        <h2 className="font-serif text-[clamp(60px,12.5vw,190px)] leading-[0.95] font-light tracking-[-0.035em]">
+        <h2 className="reveal font-serif text-[clamp(60px,12.5vw,190px)] leading-[0.95] font-light tracking-[-0.035em]">
           <span className="block">Kendi kaseni</span>
           <span className="flex flex-wrap items-center justify-end gap-x-[0.18em]">
             <span

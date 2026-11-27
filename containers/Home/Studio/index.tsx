@@ -8,7 +8,7 @@ const Studio: React.FC = () => {
   return (
     <section className="bg-cream text-earth">
       <div className="mx-auto grid max-w-page grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-center gap-x-16 gap-y-12 px-gutter py-[clamp(72px,9vw,128px)]">
-        <div className="flex max-w-130 flex-col gap-5">
+        <div className="flex max-w-130 reveal flex-col gap-5">
           <span className="text-[13px] tracking-widest text-muted uppercase">
             (Atölye)
           </span>
@@ -23,7 +23,7 @@ const Studio: React.FC = () => {
           <TextLink href="/about" title="Atölyeyi tanı" />
         </div>
 
-        <figure className="flex flex-col gap-2.5">
+        <figure className="flex reveal flex-col gap-2.5">
           <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-sand">
             <Image
               src={kilnImage}

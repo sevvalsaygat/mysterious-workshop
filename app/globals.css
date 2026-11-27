@@ -8,15 +8,46 @@
   --color-terracotta-dark: #8e3a22; /* terracotta button on hover */
   --color-olive: #5e6b3a; /* second accent */
   --color-olive-text: #4b5630; /* olive for small text (contrast) */
-  --color-espresso: #2e1a12; /* dark espresso: background of the dark sections */
+  --color-espresso: #27120c; /* deep red-brown: background of the dark sections */
   --color-earth: #33241b; /* dark earth: text on light backgrounds */
   --color-muted: #6e5a4b; /* muted text on light background */
   --color-muted-light: #cdbba3; /* muted text on dark background */
+  --color-cream-dim: #e9ded0; /* long text on dark background */
 
   /* Layout: page width, side gutter and the main breakpoint of the design */
   --container-page: 90rem; /* 1440px → max-w-page */
   --spacing-gutter: clamp(20px, 3.5vw, 50px); /* → px-gutter */
   --breakpoint-desktop: 56.25rem; /* 900px → desktop: */
+
+  /* Entrance animations (run once on load) → animate-rise, animate-pop, … */
+  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-rise-1: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.12s both;
+  --animate-rise-2: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
+  --animate-pop: pop 0.5s cubic-bezier(0.3, 1.5, 0.5, 1) 0.25s both;
+  --animate-draw: draw 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.55s both;
+  --animate-settle: settle 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+  @keyframes pop {
+    from {
+      transform: scale(0);
+    }
+  }
+  @keyframes draw {
+    from {
+      transform: scaleY(0);
+    }
+  }
+  @keyframes settle {
+    from {
+      transform: scale(1.04);
+    }
+  }
 }
 
 /* Fonts come from next/font as CSS variables on <html>, so they are mapped inline */
@@ -51,6 +82,15 @@
       animation: none !important;
       transition: none !important;
     }
+  }
+}
+
+/* Rises in as it scrolls into view; without browser support it simply shows */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 45%;
   }
 }
 

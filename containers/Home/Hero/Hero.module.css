@@ -1,0 +1,216 @@
+/*
+ * The vase sits between the two words of the giant logo, behind the letters.
+ * On scroll it falls onto the empty spot on the shelf in the photo and stays there.
+ * Every size is a multiple of the logo font size (--fs), so it all scales together.
+ * Measured on Fraunces 300: the baseline is 0.1385em above the bottom of the line box.
+ */
+.hero {
+  --fs: clamp(64px, 14vw, 210px);
+  --pad: clamp(20px, 3.5vw, 50px); /* same as px-gutter */
+  --pw: calc(min(100vw, 1440px) - 2 * var(--pad)); /* photo width */
+  --ratio: 0.4375; /* photo height / width: 16/7 */
+  --shelf: calc(
+    0.815 * var(--ratio) * var(--pw)
+  ); /* photo top → shelf (81.5% down) */
+  /* screen height the vase falls at */
+  --top: clamp(200px, calc(130px + 14vw), 340px);
+  --lift: 0px; /* extra drop so the whole photo is on screen when the vase lands */
+  --fall: calc(0.1385 * var(--fs) + 88px + var(--shelf) - var(--lift));
+  --d: calc(
+    0.185 * var(--ratio) * var(--pw) - 0.1385 * var(--fs) + var(--lift)
+  );
+  /* Ease-in-out curve: translate(p) = A·p² − B·p³ (starts at rest, lands moving with the shelf) */
+  --descent-a: calc(3 * var(--lift) + var(--fall));
+  --descent-b: calc(var(--fall) + 2 * var(--lift));
+}
+
+/* Taller on phones (16/9): the photo is less of a strip and the vase matches its neighbours */
+@media (width < 56.25rem) {
+  .hero {
+    --ratio: 0.5625;
+  }
+}
+
+.title {
+  font-size: var(--fs);
+}
+
+.photo {
+  aspect-ratio: 1 / var(--ratio);
+}
+
+.vase {
+  position: absolute;
+  bottom: calc(0.1385 * var(--fs)); /* base of the vase on the baseline */
+  left: calc(50% - 0.6955 * var(--fs)); /* centred: half of the width */
+  width: calc(1.391 * var(--fs));
+  rotate: -10deg;
+  transform-origin: 50% 100%;
+}
+
+.vaseImage {
+  /* darker, so the cream letters stay readable on it */
+  filter: brightness(0.78);
+}
+
+/* Shadow on the shelf and leaf shadow on the vase: only shown while the effect runs */
+.vaseShadow {
+  display: none;
+  position: absolute;
+  left: calc(50% - 1.0419 * var(--fs));
+  top: calc(81.5% - 1.6404 * var(--fs));
+  width: calc(2.7792 * var(--fs));
+  max-width: none;
+  height: auto;
+}
+
+.vaseDapple {
+  display: none;
+}
+
+/* The falling effect: scroll-driven CSS only, for browsers that support it and visitors
+   who have not asked for less motion. Otherwise the vase simply stays in the title. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero {
+      --lift: max(
+        0px,
+        calc(var(--shelf) + 24px - var(--top) + 0.1385 * var(--fs))
+      );
+    }
+
+    /* Lets the vase see the timeline of the marker under the photo */
+    .drop {
+      timeline-scope: --ground;
+    }
+
+    /* Stays at --top on screen while the page scrolls up under it */
+    .vaseLayer {
+      position: sticky;
+      top: var(--top);
+    }
+
+    /* The section ends exactly on the shelf, so the sticky vase stops there */
+    .photo {
+      margin-bottom: calc(-1 * var(--d));
+    }
+
+    .spacer {
+      height: var(--d);
+    }
+
+    /* 1px marker at the shelf: its timeline reaches "entry 0%" when the vase touches down */
+    .groundMark {
+      view-timeline-name: --ground;
+      view-timeline-inset: 0px calc(100% - var(--top));
+    }
+
+    /* Two animations on separate properties: rotate straightens, translate eases down */
+    .vase {
+      animation:
+        tilt ease-in-out both,
+        descend linear both;
+      animation-timeline: --ground, --ground;
+      animation-range: entry calc(-1 * var(--fall)) entry 0px;
+    }
+
+    .vaseImage {
+      animation: brighten linear both;
+      animation-timeline: --ground;
+      animation-range: entry calc(-1 * var(--fall)) entry -30px;
+    }
+
+    .vaseShadow {
+      display: block;
+      animation: shadow linear both;
+      animation-timeline: --ground;
+      animation-range: entry calc(-0.3 * var(--fall)) entry 0px;
+    }
+
+    .vaseDapple {
+      display: block;
+      animation: dapple linear both;
+      animation-timeline: --ground;
+      animation-range: entry calc(-0.45 * var(--fall)) entry 0px;
+    }
+  }
+}
+
+/* Straightens up by 80% of the way, no bounce */
+@keyframes tilt {
+  0% {
+    rotate: -10deg;
+  }
+  80%,
+  100% {
+    rotate: 0deg;
+  }
+}
+
+/*
+ * Leaves the title slowly, speeds up, then slows down again: at touchdown its speed on
+ * screen equals the page's, so it lands on the shelf and scrolls on with it without a jolt.
+ * The curve A·p² − B·p³ is sampled at every 12.5% (p = progress of the fall),
+ * with extra points near the end.
+ */
+@keyframes descend {
+  0% {
+    translate: 0 0;
+  }
+  /* values: A·p² − B·p³ */
+  12.5% {
+    translate: 0 calc(var(--descent-a) * 0.015625 - var(--descent-b) * 0.001953);
+  }
+  25% {
+    translate: 0 calc(var(--descent-a) * 0.0625 - var(--descent-b) * 0.015625);
+  }
+  37.5% {
+    translate: 0 calc(var(--descent-a) * 0.140625 - var(--descent-b) * 0.052734);
+  }
+  50% {
+    translate: 0 calc(var(--descent-a) * 0.25 - var(--descent-b) * 0.125);
+  }
+  62.5% {
+    translate: 0 calc(var(--descent-a) * 0.390625 - var(--descent-b) * 0.244141);
+  }
+  75% {
+    translate: 0 calc(var(--descent-a) * 0.5625 - var(--descent-b) * 0.421875);
+  }
+  87.5% {
+    translate: 0 calc(var(--descent-a) * 0.765625 - var(--descent-b) * 0.669922);
+  }
+  /* Two extra points just before touchdown, where the speed matters most */
+  95% {
+    translate: 0 calc(var(--descent-a) * 0.9025 - var(--descent-b) * 0.857375);
+  }
+  98.5% {
+    translate: 0 calc(var(--descent-a) * 0.970225 - var(--descent-b) * 0.955672);
+  }
+  100% {
+    translate: 0 var(--lift);
+  }
+}
+
+@keyframes brighten {
+  to {
+    filter: brightness(1);
+  }
+}
+
+@keyframes shadow {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dapple {
+  from {
+    opacity: 0;
+  }
+}

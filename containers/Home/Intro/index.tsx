@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { TextLink } from "@app/components";
 
 const Intro: React.FC = () => {
   return (
@@ -17,18 +17,7 @@ const Intro: React.FC = () => {
             veriyor; sofralar için kase, kupa ve tabaklar üretiyoruz. Her parça
             çarkta ya da elde şekilleniyor, atölyenin kendi fırınında pişiyor.
           </p>
-          <Link
-            href="/about"
-            className="group self-start text-sm font-semibold underline underline-offset-[5px]"
-          >
-            Hakkımızda{" "}
-            <span
-              aria-hidden="true"
-              className="inline-block transition-transform duration-250 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            >
-              ↗
-            </span>
-          </Link>
+          <TextLink href="/about" title="Hakkımızda" />
         </div>
       </div>
     </section>

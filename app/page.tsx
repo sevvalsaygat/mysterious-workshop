@@ -7,6 +7,7 @@ const HomePage: React.FC = () => {
       <Home.Intro />
       <Home.Workshops />
       <Home.Collection />
+      <Home.Studio />
     </>
   );
 };
